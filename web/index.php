@@ -1,6 +1,6 @@
 <?php
 session_start();
 
-define('IS_WEB', true);
+define('IS_API', true);
 
 include '../bootstrap-api.php';

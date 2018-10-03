@@ -25,7 +25,7 @@ $application = (new \App\ApiApp())
 	->setEnvironment($env)
 	->setAppEvent($event)
 	->setAppKernel($appKernel)
-	->setApplicationType('Web');
+	->setApplicationType('Api');
 
 set_exception_handler(function($e) use($application) {
 	$application->outputException($e);
