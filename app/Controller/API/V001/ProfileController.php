@@ -6,7 +6,7 @@
  * Time: 22:38
  */
 
-namespace Controller\API\V001;
+namespace App\Controller\API\V001;
 
 use System\Controller\AbstractController;
 
@@ -19,7 +19,10 @@ class ProfileController extends AbstractController
 
 	public function infoAction()
 	{
-
+		throw new \Exception('fgfgfgg');
+		return $this->responseApiOK([
+			'title' => 'sdsd'
+		]);
 	}
 
 	public function registerAction()

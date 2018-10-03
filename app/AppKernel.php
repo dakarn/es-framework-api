@@ -98,11 +98,6 @@ final class AppKernel
     {
         $this->middlewares[] = [
             'autoStart' => false,
-            'class'     => MiddlewareApp\MiddlewareCheckingBot::class,
-        ];
-
-        $this->middlewares[] = [
-            'autoStart' => false,
             'class'     => MiddlewareApp\MiddlewareCheckAuth::class,
         ];
 

@@ -5,11 +5,11 @@ use App\MiddlewareApp\MiddlewareCheckAjax;
 return [
 	[
 		'name'       => 'api-get',
-		'path'       => 'api/get',
-		'controller' => 'Controller:Api:V1:ApiController',
-		'action'     => 'get',
+		'path'       => 'v001/profile/get',
+		'controller' => 'Controller:API:V001:ProfileController',
+		'action'     => 'info',
 		'allow'      => ['GET'],
-		'middleware' => [MiddlewareCheckAjax::class],
+		'middleware' => [],
 	],
 	[
 		'name'       => 'api-add',
