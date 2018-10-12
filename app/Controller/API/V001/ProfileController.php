@@ -19,7 +19,6 @@ class ProfileController extends AbstractController
 
 	public function infoAction()
 	{
-		throw new \Exception('fgfgfgg');
 		return $this->responseApiOK([
 			'title' => 'sdsd'
 		]);

@@ -12,15 +12,15 @@ use Exception\ExceptionListener\ExceptionListener;
 use Http\Request\ServerRequest;
 use Http\Response\API;
 use Http\Response\Response;
-use System\Database\DB;
-use System\Logger\LoggerStorage;
+use System\EventListener\EventManager;
 use System\Kernel\TypesApp\AbstractApplication;
+use System\Logger\LoggerElasticSearch;
 use System\Logger\LogLevel;
 use Http\Middleware\StorageMiddleware;
 use Providers\StorageProviders;
 use System\EventListener\EventTypes;
 
-class ApiApp extends AbstractApplication
+class ApiApp extends AbstractApplication implements ApiAppInterface
 {
 	const ERROR_500 = '500 Internal Server Error';
 
@@ -35,16 +35,25 @@ class ApiApp extends AbstractApplication
 	private $response;
 
 	/**
-	 * @param AppKernel $appKernel
-	 * @return AbstractApplication
+	 * @var AppKernel
 	 */
-	public function setAppKernel(AppKernel $appKernel): AbstractApplication
-	{
-		parent::setAppKernel($appKernel);
-		StorageProviders::add($appKernel->getProviders());
-		StorageMiddleware::add($appKernel->getMiddlewares());
+	private $appKernel;
 
-		return $this;
+	/**
+	 * @return void
+	 */
+	public function setupClass()
+	{
+		$appEvent = new AppEvent();
+		$this->eventManager = $appEvent->installEvents(new EventManager());
+
+		$this->appKernel = new AppKernel();
+		$this->appKernel
+			->installMiddlewares()
+			->installProviders();
+
+		StorageProviders::add($this->appKernel->getProviders());
+		StorageMiddleware::add($this->appKernel->getMiddlewares());
 	}
 
 	/**
@@ -90,8 +99,7 @@ class ApiApp extends AbstractApplication
 
 	public function terminate()
 	{
-		DB::disconnect();
-		LoggerStorage::create()->releaseLog();
+		LoggerElasticSearch::create()->releaseLog();
 	}
 
 	/**

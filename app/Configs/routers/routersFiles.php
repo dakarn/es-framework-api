@@ -2,5 +2,4 @@
 
 return [
 	'api',
-	'default',
 ];
