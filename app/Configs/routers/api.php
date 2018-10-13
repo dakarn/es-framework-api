@@ -1,6 +1,8 @@
 <?php
 
 use App\MiddlewareApp\MiddlewareCheckAjax;
+use Http\Middleware\MiddlewareGrantAccess;
+use Models\User\User;
 
 return [
 	[
@@ -9,7 +11,8 @@ return [
 		'controller' => 'Controller:API:V001:ProfileController',
 		'action'     => 'info',
 		'allow'      => ['GET'],
-		'middleware' => [],
+		'access'      => User::ROLE_USER,
+		'middleware' => [MiddlewareGrantAccess::class],
 	],
 	[
 		'name'       => 'api-add',

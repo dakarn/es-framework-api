@@ -8,6 +8,7 @@
 
 namespace App\Controller\API\V001;
 
+use Http\Response\Response;
 use System\Controller\AbstractController;
 
 class ProfileController extends AbstractController
@@ -17,7 +18,10 @@ class ProfileController extends AbstractController
 
 	}
 
-	public function infoAction()
+	/**
+	 * @return \Http\Response\Response
+	 */
+	public function infoAction(): Response
 	{
 		return $this->responseApiOK([
 			'title' => 'sdsd'
