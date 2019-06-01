@@ -6,19 +6,19 @@
  * Time: 21:55
  */
 
-namespace App;
+namespace ES\App;
 
-use Exception\ExceptionListener\ExceptionListener;
-use Http\Request\ServerRequest;
-use Http\Response\API;
-use Http\Response\Response;
-use System\EventListener\EventManager;
-use System\Kernel\TypesApp\AbstractApplication;
-use System\Logger\LoggerElasticSearch;
-use System\Logger\LogLevel;
-use Http\Middleware\StorageMiddleware;
-use Providers\StorageProviders;
-use System\EventListener\EventTypes;
+use ES\Kernel\Exception\ExceptionListener\ExceptionListener;
+use ES\Kernel\Http\Request\ServerRequest;
+use ES\Kernel\Http\Response\API;
+use ES\Kernel\Http\Response\Response;
+use ES\Kernel\System\EventListener\EventManager;
+use ES\Kernel\System\Kernel\TypesApp\AbstractApplication;
+use ES\Kernel\System\Logger\LoggerElasticSearchStorage;
+use ES\Kernel\System\Logger\LogLevel;
+use ES\Kernel\Http\Middleware\StorageMiddleware;
+use ES\Kernel\Providers\StorageProviders;
+use ES\Kernel\System\EventListener\EventTypes;
 
 class ApiApp extends AbstractApplication implements ApiAppInterface
 {
@@ -58,7 +58,7 @@ class ApiApp extends AbstractApplication implements ApiAppInterface
 
 	/**
 	 * @return ApiApp
-	 * @throws \Exception\MiddlewareException
+	 * @throws \ES\Kernel\Exception\MiddlewareException
 	 */
 	public function handle(): ApiApp
 	{
@@ -81,7 +81,6 @@ class ApiApp extends AbstractApplication implements ApiAppInterface
 	}
 
 	/**
-	 * @throws \Exception\FileException
 	 * @throws \Throwable
 	 */
 	public function run()
@@ -97,9 +96,13 @@ class ApiApp extends AbstractApplication implements ApiAppInterface
 		}
 	}
 
+	/**
+	 * @throws \ES\Kernel\Exception\FileException
+	 * @throws \ES\Kernel\Exception\HttpException
+	 */
 	public function terminate()
 	{
-		LoggerElasticSearch::create()->releaseLog();
+		LoggerElasticSearchStorage::create()->releaseLogs();
 	}
 
 	/**
@@ -108,7 +111,7 @@ class ApiApp extends AbstractApplication implements ApiAppInterface
 	 */
 	public function customOutputError(\Throwable $e)
 	{
-		if ($this->env == self::ENV_TYPE['DEV']) {
+		if ($this->env == self::ENV_DEV) {
 			$error = 'Exception: ' . $e->getMessage() .' in ' . $e->getFile() . ' on line ' . $e->getLine();
 		} else {
 			$error = self::ERROR_500;

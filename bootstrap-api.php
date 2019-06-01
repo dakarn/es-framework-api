@@ -16,21 +16,9 @@ if (IS_DEV) {
 	include_once 'dev.php';
 }
 
-$application = (new \App\ApiApp())
+$application = (new ES\App\ApiApp())
 	->setEnvironment($env)
 	->setApplicationType('Api');
-
-\set_exception_handler(function($e) use($application) {
-	$application->outputException($e);
-});
-
-\set_error_handler(function($errno, $errstr, $errfile, $errline) use($application) {
-	$application->outputError($errno, $errstr, $errfile, $errline);
-});
-
-\register_shutdown_function(function() use($application) {
-	System\Kernel\ShutdownScript::run();
-});
 
 $application->run();
 $application->outputResponse();

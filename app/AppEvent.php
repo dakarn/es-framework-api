@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace ES\App;
 
-use System\EventListener\EventManager;
-use System\Registry;
+use ES\Kernel\System\ES;
+use ES\Kernel\System\EventListener\EventManager;
 
 final class AppEvent
 {
@@ -13,7 +13,7 @@ final class AppEvent
 	 */
 	public function installEvents(EventManager $eventManager): EventManager
 	{
-		Registry::set(Registry::APP_EVENT, $eventManager);
+		ES::set(ES::APP_EVENT, $eventManager);
 		return $eventManager;
 	}
 }

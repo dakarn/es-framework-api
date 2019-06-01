@@ -1,8 +1,8 @@
 <?php
 
-use App\MiddlewareApp\MiddlewareCheckAjax;
-use Http\Middleware\MiddlewareGrantAccess;
-use Models\User\User;
+use ES\App\MiddlewareApp\MiddlewareCheckAjax;
+use ES\Kernel\Http\Middleware\MiddlewareGrantAccess;
+use ES\Kernel\Models\User\User;
 
 return [
 	[
@@ -21,6 +21,20 @@ return [
 		'action'     => 'add',
 		'allow'      => ['PUT'],
 		'middleware' => [MiddlewareCheckAjax::class],
+	],
+	[
+		'name'       => 'create-cookie',
+		'path'       => 'v001/session/start',
+		'controller' => 'Controller:Api:V001:ProfileController',
+		'action'     => 'createAuthCookie',
+		'allow'      => ['GET', 'POST'],
+	],
+	[
+		'name'       => 'delete-cookie',
+		'path'       => 'v001/session/destroy',
+		'controller' => 'Controller:Api:V001:ProfileController',
+		'action'     => 'deleteAuthCookie',
+		'allow'      => ['GET', 'POST'],
 	],
 	[
 		'name'       => 'api-update',

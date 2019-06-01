@@ -1,15 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 29.09.2018
- * Time: 22:38
- */
+<?
 
-namespace App\Controller\API\V001;
+namespace ES\App\Controller\API\V001;
 
-use Http\Response\Response;
-use System\Controller\AbstractController;
+use ES\Kernel\Http\Response\Response;
+use ES\Kernel\Models\User\User;
+use ES\Kernel\System\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {
@@ -19,17 +14,30 @@ class ProfileController extends AbstractController
 	}
 
 	/**
-	 * @return \Http\Response\Response
+	 * @return Response
+	 * @throws \ES\Kernel\Exception\FileException
 	 */
 	public function infoAction(): Response
 	{
 		return $this->responseApiOK([
-			'title' => 'sdsd'
+			'title' => User::current()->getLogin()
 		]);
 	}
 
 	public function registerAction()
 	{
 
+	}
+
+	public function createAuthCookieAction(): Response
+	{
+		$this->response->withCookie('JWT', $this->request->takePost('cookie'));
+
+		return $this->responseApiOK([]);
+	}
+
+	public function destroyAuthCookieAction(): Response
+	{
+		return $this->responseApiOK([]);
 	}
 }
