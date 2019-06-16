@@ -6,7 +6,7 @@ use ES\Kernel\Http\Middleware\MiddlewareAllowMethod;
 use ES\Kernel\Http\Middleware\MiddlewareController;
 use ES\Kernel\Http\Middleware\MiddlewarePreController;
 use ES\Kernel\Http\Middleware\MiddlewareRouting;
-use ES\Kernel\System\ES;
+use ES\Kernel\Helper\ES;
 
 final class AppKernel
 {

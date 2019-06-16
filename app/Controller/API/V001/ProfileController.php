@@ -4,7 +4,7 @@ namespace ES\App\Controller\API\V001;
 
 use ES\Kernel\Http\Response\Response;
 use ES\Kernel\Models\User\User;
-use ES\Kernel\System\Controller\AbstractController;
+use ES\Kernel\Controller\AbstractController;
 
 class ProfileController extends AbstractController
 {

@@ -2,8 +2,8 @@
 
 namespace ES\App;
 
-use ES\Kernel\System\ES;
-use ES\Kernel\System\EventListener\EventManager;
+use ES\Kernel\Helper\ES;
+use ES\Kernel\EventListener\EventManager;
 
 final class AppEvent
 {

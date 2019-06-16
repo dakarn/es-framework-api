@@ -12,13 +12,13 @@ use ES\Kernel\Exception\ExceptionListener\ExceptionListener;
 use ES\Kernel\Http\Request\ServerRequest;
 use ES\Kernel\Http\Response\API;
 use ES\Kernel\Http\Response\Response;
-use ES\Kernel\System\EventListener\EventManager;
-use ES\Kernel\System\Kernel\TypesApp\AbstractApplication;
-use ES\Kernel\System\Logger\LoggerElasticSearchStorage;
-use ES\Kernel\System\Logger\LogLevel;
+use ES\Kernel\EventListener\EventManager;
+use ES\Kernel\Kernel\TypesApp\AbstractApplication;
+use ES\Kernel\Logger\LoggerElasticSearchStorage;
+use ES\Kernel\Logger\LogLevel;
 use ES\Kernel\Http\Middleware\StorageMiddleware;
 use ES\Kernel\Providers\StorageProviders;
-use ES\Kernel\System\EventListener\EventTypes;
+use ES\Kernel\EventListener\EventTypes;
 
 class ApiApp extends AbstractApplication implements ApiAppInterface
 {
